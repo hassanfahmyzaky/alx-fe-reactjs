@@ -1,8 +1,10 @@
-React.createContext()
+// UserContext.js
+
 import { createContext } from 'react';
 
-// Creating the UserContext with a default value (in case there's no provider)
+// Step 1: Initialize the context with a default value
+// The default value is an object with name and email
 export const UserContext = createContext({
-  name: "Default User", // default name
-  email: "default@example.com" // default email
+  name: "Default User",
+  email: "default@example.com"
 });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';  // Import React and useState
 import UserProfile from './components/UserProfile'; // Import UserProfile component
 import Header from './components/Header';
 import MainContent from './components/MainContent';
