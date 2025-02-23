@@ -1,8 +1,8 @@
-// src/UserContext.js
-import React, { createContext } from 'react';
+React.createContext()
+import { createContext } from 'react';
 
-// Create the context
-export const UserContext = createContext();
-
-// Custom hook to use the UserContext (optional, but cleaner)
-export const useUser = () => React.useContext(UserContext);
+// Creating the UserContext with a default value (in case there's no provider)
+export const UserContext = createContext({
+  name: "Default User", // default name
+  email: "default@example.com" // default email
+});
