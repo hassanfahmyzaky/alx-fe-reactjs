@@ -1,36 +1,31 @@
-import { useState } from 'react';
-import './App.css'; // Import your CSS
-import reactLogo from './assets/react.svg'; // React logo (if you want to keep)
-import viteLogo from '/vite.svg'; // Vite logo (if you want to keep)
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import necessary router components
+import './App.css';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
-import SearchBar from './components/SearchBar'; // Import the SearchBar component
+import SearchBar from './components/SearchBar';
+import RecipeDetail from './components/RecipeDetail'; // Import the RecipeDetail component
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <div>
-          {/* Vite and React logos */}
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Recipe Sharing App</h1> {/* Main title */}
-      </header>
+    <Router>
+      <div className="App">
+        <header>
+          <h1>Recipe Sharing App</h1>
+        </header>
 
-      <main>
-        {/* Search bar to filter recipes */}
-        <SearchBar />
-        {/* Form to add new recipes */}
-        <AddRecipeForm />
-        {/* List of recipes */}
-        <RecipeList />
-      </main>
-    </div>
+        <main>
+          <SearchBar />
+          <Routes>
+            {/* Route for Home Page */}
+            <Route path="/" element={<RecipeList />} />
+            {/* Route for Adding a Recipe */}
+            <Route path="/add" element={<AddRecipeForm />} />
+            {/* Route for Recipe Details (Dynamic path) */}
+            <Route path="/recipe/:id" element={<RecipeDetail />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
