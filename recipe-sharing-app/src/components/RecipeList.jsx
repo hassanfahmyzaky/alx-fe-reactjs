@@ -1,14 +1,15 @@
-import { useRecipeStore } from './recipeStore';
+import { useRecipeStore } from '../recipeStore';
 
 const RecipeList = () => {
-  const recipes = useRecipeStore(state => state.recipes);
+  // Use filteredRecipes from the Zustand store
+  const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
 
   return (
     <div>
-      {recipes.length === 0 ? (
-        <p>No recipes available. Add some!</p>
+      {filteredRecipes.length === 0 ? (
+        <p>No recipes found. Try a different search term!</p>
       ) : (
-        recipes.map(recipe => (
+        filteredRecipes.map(recipe => (
           <div key={recipe.id}>
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>

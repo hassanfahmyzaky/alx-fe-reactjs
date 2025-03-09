@@ -1,18 +1,17 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-
+import './App.css'; // Import your CSS
+import reactLogo from './assets/react.svg'; // React logo (if you want to keep)
+import viteLogo from '/vite.svg'; // Vite logo (if you want to keep)
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
+import SearchBar from './components/SearchBar'; // Import the SearchBar component
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <header>
         <div>
+          {/* Vite and React logos */}
           <a href="https://vite.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
           </a>
@@ -20,23 +19,15 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
         </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount(count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
+        <h1>Recipe Sharing App</h1> {/* Main title */}
       </header>
 
       <main>
-        <h1>Recipe Sharing App</h1>
+        {/* Search bar to filter recipes */}
+        <SearchBar />
+        {/* Form to add new recipes */}
         <AddRecipeForm />
+        {/* List of recipes */}
         <RecipeList />
       </main>
     </div>
