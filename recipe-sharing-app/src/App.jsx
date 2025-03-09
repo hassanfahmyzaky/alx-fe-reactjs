@@ -1,36 +1,34 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState } from 'react';
+import './App.css'; // Import your CSS
+import reactLogo from './assets/react.svg'; // React logo (if you want to keep)
+import viteLogo from '/vite.svg'; // Vite logo (if you want to keep)
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
-import SearchBar from './components/SearchBar';
-import FavoritesList from './components/FavoritesList';
-import RecommendationsList from './components/RecommendationsList';
-import { useRecipeStore } from './recipeStore';
+import SearchBar from './components/SearchBar'; // Import the SearchBar component
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  // Generate recommendations whenever the favorites change
-  useEffect(() => {
-    useRecipeStore.getState().generateRecommendations();
-  }, [useRecipeStore.getState().favorites]);
-
   return (
     <div className="App">
       <header>
-        <h1>Recipe Sharing App</h1>
+        <div>
+          {/* Vite and React logos */}
+          <a href="https://vite.dev" target="_blank">
+            <img src={viteLogo} className="logo" alt="Vite logo" />
+          </a>
+          <a href="https://react.dev" target="_blank">
+            <img src={reactLogo} className="logo react" alt="React logo" />
+          </a>
+        </div>
+        <h1>Recipe Sharing App</h1> {/* Main title */}
       </header>
 
       <main>
+        {/* Search bar to filter recipes */}
         <SearchBar />
+        {/* Form to add new recipes */}
         <AddRecipeForm />
+        {/* List of recipes */}
         <RecipeList />
-        
-        {/* Favorites List */}
-        <FavoritesList />
-        
-        {/* Recommendations List */}
-        <RecommendationsList />
       </main>
     </div>
   );
