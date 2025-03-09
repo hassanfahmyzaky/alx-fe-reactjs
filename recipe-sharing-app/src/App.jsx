@@ -1,31 +1,38 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import necessary router components
+import { useState, useEffect } from 'react';
 import './App.css';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import SearchBar from './components/SearchBar';
-import RecipeDetail from './components/RecipeDetail'; // Import the RecipeDetail component
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
+import { useRecipeStore } from './recipeStore';
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <header>
-          <h1>Recipe Sharing App</h1>
-        </header>
+  const [count, setCount] = useState(0);
 
-        <main>
-          <SearchBar />
-          <Routes>
-            {/* Route for Home Page */}
-            <Route path="/" element={<RecipeList />} />
-            {/* Route for Adding a Recipe */}
-            <Route path="/add" element={<AddRecipeForm />} />
-            {/* Route for Recipe Details (Dynamic path) */}
-            <Route path="/recipe/:id" element={<RecipeDetail />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
+  // Generate recommendations whenever the favorites change
+  useEffect(() => {
+    useRecipeStore.getState().generateRecommendations();
+  }, [useRecipeStore.getState().favorites]);
+
+  return (
+    <div className="App">
+      <header>
+        <h1>Recipe Sharing App</h1>
+      </header>
+
+      <main>
+        <SearchBar />
+        <AddRecipeForm />
+        <RecipeList />
+        
+        {/* Favorites List */}
+        <FavoritesList />
+        
+        {/* Recommendations List */}
+        <RecommendationsList />
+      </main>
+    </div>
   );
 }
 
