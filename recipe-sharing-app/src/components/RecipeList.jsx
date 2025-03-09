@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { useRecipeStore } from '../recipeStore';
 
 const RecipeList = () => {
@@ -6,6 +7,12 @@ const RecipeList = () => {
 
   return (
     <div>
+      <div>
+        <Link to="/add">
+          <button>Add New Recipe</button>
+        </Link>
+      </div>
+
       {filteredRecipes.length === 0 ? (
         <p>No recipes found. Try a different search term!</p>
       ) : (
