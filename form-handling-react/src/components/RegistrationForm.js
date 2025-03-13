@@ -3,21 +3,16 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  // Initialize state for form fields
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({
+    username: false,
+    email: false,
+    password: false,
+  });
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "username") setUsername(value);
-    if (name === "email") setEmail(value);
-    if (name === "password") setPassword(value);
-  };
-
-  // Basic validation
   const validate = () => {
     const errors = {};
     if (!username) errors.username = "Username is required";
@@ -26,7 +21,18 @@ const RegistrationForm = () => {
     return errors;
   };
 
-  // Handle form submission
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "username") setUsername(value);
+    if (name === "email") setEmail(value);
+    if (name === "password") setPassword(value);
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -47,8 +53,9 @@ const RegistrationForm = () => {
           name="username"
           value={username}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
-        {errors.username && <span>{errors.username}</span>}
+        {touched.username && errors.username && <span>{errors.username}</span>}
       </div>
 
       <div>
@@ -59,8 +66,9 @@ const RegistrationForm = () => {
           name="email"
           value={email}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
-        {errors.email && <span>{errors.email}</span>}
+        {touched.email && errors.email && <span>{errors.email}</span>}
       </div>
 
       <div>
@@ -71,8 +79,9 @@ const RegistrationForm = () => {
           name="password"
           value={password}
           onChange={handleChange}
+          onBlur={handleBlur}
         />
-        {errors.password && <span>{errors.password}</span>}
+        {touched.password && errors.password && <span>{errors.password}</span>}
       </div>
 
       <button type="submit">Submit</button>
