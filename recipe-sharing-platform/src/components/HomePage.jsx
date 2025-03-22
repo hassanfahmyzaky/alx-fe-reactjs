@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import recipeData from '../data.json'; // Import the mock data
-import recipeData from '../data.json'; // Assuming your recipe data is here
+import { Link } from 'react-router-dom'; // Importing the 'Link' component
+import recipeData from '../data.json'; // Importing your recipe data
 
-function HomePage() {
+const HomePage = () => {
   const [recipesList, setRecipesList] = useState([]);
 
   useEffect(() => {
@@ -11,30 +11,27 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold text-center mb-6">Recipe Sharing Platform</h2>
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-semibold mb-4">Recipe Sharing Platform</h1>
 
       {/* Recipe Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
         {recipesList.map((recipe) => (
-          <div key={recipe.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
-              <p className="text-gray-600 text-sm mb-4">{recipe.summary}</p>
-              <a href={`/recipe/${recipe.id}`} className="text-blue-500 hover:underline">
-                View Recipe
-              </a>
+          <Link to={`/recipe/${recipe.id}`} key={recipe.id} className="block">
+            <div className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                className="w-full h-48 object-cover mb-4 rounded-lg"
+              />
+              <h2 className="text-xl font-semibold">{recipe.title}</h2>
+              <p className="text-gray-600">{recipe.summary}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;
