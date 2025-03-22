@@ -13,8 +13,14 @@
     },
     {
       "id": 3,
-      "title": "Vegetable Stir Fry",
-      "summary": "A healthy mix of stir-fried vegetables with soy sauce, garlic, and ginger.",
+      "title": "Beef Stroganoff",
+      "summary": "A rich and creamy beef dish served with noodles or rice.",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 4,
+      "title": "Vegetable Stir-Fry",
+      "summary": "A quick stir-fry with mixed vegetables and a soy-based sauce.",
       "image": "https://via.placeholder.com/150"
     }
   ]

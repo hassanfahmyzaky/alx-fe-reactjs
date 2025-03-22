@@ -1,39 +1,12 @@
 import { useEffect, useState } from 'react';
-
-// Mock recipe data
-const recipes = [
-  {
-    id: 1,
-    title: 'Spaghetti Carbonara',
-    summary: 'A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.',
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 2,
-    title: 'Chicken Tikka Masala',
-    summary: 'Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.',
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 3,
-    title: 'Beef Stroganoff',
-    summary: 'A rich and creamy beef dish served with noodles or rice.',
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 4,
-    title: 'Vegetable Stir-Fry',
-    summary: 'A quick stir-fry with mixed vegetables and a soy-based sauce.',
-    image: 'https://via.placeholder.com/150'
-  }
-];
+import recipeData from '../data.json'; // Import the mock data
 
 function HomePage() {
   const [recipesList, setRecipesList] = useState([]);
 
   useEffect(() => {
-    // Mock fetch request to load data
-    setRecipesList(recipes);
+    // You can directly use the imported recipeData to set state
+    setRecipesList(recipeData);
   }, []);
 
   return (
