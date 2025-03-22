@@ -1,82 +1,56 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import data from "../data.json"; // Make sure the path is correct
 
-// Mock recipe data (replace with actual data source in a real project)
-const recipes = [
-  {
-    id: 1,
-    title: "Spaghetti Carbonara",
-    summary: "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "200g spaghetti",
-      "100g pancetta",
-      "2 eggs",
-      "50g Parmesan cheese",
-      "Black pepper"
-    ],
-    steps: [
-      "Boil the spaghetti in salted water.",
-      "Fry the pancetta in olive oil until crispy.",
-      "Whisk eggs and Parmesan in a bowl.",
-      "Toss the pasta with pancetta and egg mixture."
-    ]
-  },
-  {
-    id: 2,
-    title: "Chicken Tikka Masala",
-    summary: "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-    image: "https://via.placeholder.com/150",
-    ingredients: [
-      "500g chicken breast",
-      "200g yogurt",
-      "Spices (garam masala, turmeric, cumin)",
-      "200ml tomato puree",
-      "Fresh coriander"
-    ],
-    steps: [
-      "Marinate the chicken in yogurt and spices.",
-      "Grill the chicken until cooked.",
-      "Make the gravy with tomato puree and spices.",
-      "Simmer the chicken in the gravy until fully cooked."
-    ]
-  }
-  // Add other recipes similarly...
-];
-
-function RecipeDetail() {
-  const { id } = useParams();  // Get the id from the URL
+const RecipeDetail = () => {
+  const { id } = useParams(); // Get the recipe ID from the URL parameter
   const [recipe, setRecipe] = useState(null);
+  const navigate = useNavigate();
 
+  // Fetch recipe data when the component is mounted
   useEffect(() => {
-    // Find the recipe with the matching id
-    const foundRecipe = recipes.find(recipe => recipe.id === parseInt(id));
+    // Find the recipe with the corresponding ID
+    const foundRecipe = data.find((recipe) => recipe.id === parseInt(id));
     setRecipe(foundRecipe);
   }, [id]);
 
-  if (!recipe) return <div>Loading...</div>;
+  if (!recipe) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
-      <img src={recipe.image} alt={recipe.title} className="w-full h-auto mb-4" />
-      <p className="mb-4 text-lg">{recipe.summary}</p>
+    <div className="max-w-4xl mx-auto p-6">
+      <button
+        onClick={() => navigate("/")}
+        className="mb-4 text-blue-500 hover:text-blue-700"
+      >
+        Back to Home
+      </button>
+      <div className="recipe-detail">
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          className="w-full h-64 object-cover mb-4"
+        />
+        <h2 className="text-3xl font-semibold mb-2">{recipe.title}</h2>
+        <p className="text-lg text-gray-700 mb-4">{recipe.summary}</p>
 
-      <h2 className="text-2xl font-semibold mb-2">Ingredients:</h2>
-      <ul className="list-disc list-inside mb-4">
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index} className="text-lg">{ingredient}</li>
-        ))}
-      </ul>
+        <h3 className="text-xl font-semibold mb-2">Ingredients</h3>
+        <ul className="list-disc ml-6 mb-4">
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index} className="text-gray-700">{ingredient}</li>
+          ))}
+        </ul>
 
-      <h2 className="text-2xl font-semibold mb-2">Instructions:</h2>
-      <ol className="list-decimal list-inside">
-        {recipe.steps.map((step, index) => (
-          <li key={index} className="text-lg">{step}</li>
-        ))}
-      </ol>
+        <h3 className="text-xl font-semibold mb-2">Steps</h3>
+        <ol className="list-decimal ml-6">
+          {recipe.steps.map((step, index) => (
+            <li key={index} className="text-gray-700">{step}</li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
-}
+};
 
 export default RecipeDetail;
