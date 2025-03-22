@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from './components/HomePage'; // Import HomePage component
 import RecipeDetail from './components/RecipeDetail'; // Import RecipeDetail component
 
+
 function App() {
   const [count, setCount] = useState(0);
 
