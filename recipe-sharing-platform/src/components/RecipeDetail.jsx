@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import data from "../data.json"; // Make sure the path is correct
+import data from "../data.json"; // Adjust path if needed
 
 const RecipeDetail = () => {
   const { id } = useParams(); // Get the recipe ID from the URL parameter
@@ -44,9 +44,14 @@ const RecipeDetail = () => {
 
         <h3 className="text-xl font-semibold mb-2">Instructions</h3>
         <ol className="list-decimal ml-6">
-          {recipe.steps.map((step, index) => (
-            <li key={index} className="text-gray-700">{step}</li>
-          ))}
+          {/* Check for 'instructions' here, or use 'steps' if necessary */}
+          {recipe.instructions ? (
+            recipe.instructions.map((step, index) => (
+              <li key={index} className="text-gray-700">{step}</li>
+            ))
+          ) : (
+            <p>No instructions available</p>
+          )}
         </ol>
       </div>
     </div>

@@ -11,30 +11,12 @@
         "50g Parmesan cheese",
         "Black pepper"
       ],
-      "steps": [
+      "instructions": [
         "Boil the spaghetti in salted water.",
         "Fry the pancetta in olive oil until crispy.",
         "Whisk eggs and Parmesan in a bowl.",
         "Toss the pasta with pancetta and egg mixture."
       ]
-    },
-    {
-      "id": 2,
-      "title": "Chicken Tikka Masala",
-      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 3,
-      "title": "Beef Stroganoff",
-      "summary": "A rich and creamy beef dish served with noodles or rice.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 4,
-      "title": "Vegetable Stir-Fry",
-      "summary": "A quick stir-fry with mixed vegetables and a soy-based sauce.",
-      "image": "https://via.placeholder.com/150"
     }
   ]
   
