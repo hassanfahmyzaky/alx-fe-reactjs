@@ -1,40 +1,58 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
-// Importing the mock data (if using import, you can import JSON directly)
-import recipeData from "../data.json";
+// Mock recipe data
+const recipes = [
+  {
+    id: 1,
+    title: 'Spaghetti Carbonara',
+    summary: 'A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    id: 2,
+    title: 'Chicken Tikka Masala',
+    summary: 'Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    id: 3,
+    title: 'Beef Stroganoff',
+    summary: 'A rich and creamy beef dish served with noodles or rice.',
+    image: 'https://via.placeholder.com/150'
+  },
+  {
+    id: 4,
+    title: 'Vegetable Stir-Fry',
+    summary: 'A quick stir-fry with mixed vegetables and a soy-based sauce.',
+    image: 'https://via.placeholder.com/150'
+  }
+];
 
 function HomePage() {
-  const [recipes, setRecipes] = useState([]);
+  const [recipesList, setRecipesList] = useState([]);
 
-  // Load recipe data on component mount
   useEffect(() => {
-    // For static data, you can use it directly (like in the example above)
-    setRecipes(recipeData);
+    // Mock fetch request to load data
+    setRecipesList(recipes);
   }, []);
 
   return (
     <div className="p-4">
-      <h1 className="text-3xl font-bold text-center my-6">Recipe Sharing Platform</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {recipes.map((recipe) => (
-          <div
-            key={recipe.id}
-            className="max-w-sm rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out"
-          >
+      <h2 className="text-2xl font-bold text-center mb-6">Recipe Sharing Platform</h2>
+
+      {/* Recipe Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recipesList.map((recipe) => (
+          <div key={recipe.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              className="w-full h-48 object-cover"
               src={recipe.image}
               alt={recipe.title}
+              className="w-full h-48 object-cover"
             />
-            <div className="px-6 py-4">
-              <h2 className="font-semibold text-xl">{recipe.title}</h2>
-              <p className="text-gray-700 text-base">{recipe.summary}</p>
-            </div>
-            <div className="px-6 py-4">
-              <a
-                href="#"
-                className="text-blue-500 hover:text-blue-700 transition-all duration-300"
-              >
+            <div className="p-4">
+              <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
+              <p className="text-gray-600 text-sm mb-4">{recipe.summary}</p>
+              <a href={`/recipe/${recipe.id}`} className="text-blue-500 hover:underline">
                 View Recipe
               </a>
             </div>
