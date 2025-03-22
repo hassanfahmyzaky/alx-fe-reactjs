@@ -1,14 +1,16 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import HomePage from './components/HomePage'; // Import HomePage component
+import RecipeDetail from './components/RecipeDetail'; // Import RecipeDetail component
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <Router>
       {/* Recipe Sharing Greeting */}
       <div className="text-blue-500">
         <h1>Hello, Recipe Sharing Platform!</h1>
@@ -40,9 +42,12 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-      {/* Include HomePage component here */}
-      <HomePage />
-    </>
+      {/* Routes Setup */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
