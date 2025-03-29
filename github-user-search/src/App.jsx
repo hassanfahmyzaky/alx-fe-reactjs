@@ -16,21 +16,21 @@ const App = () => {
 
   const handleSearch = async () => {
     if (searchQuery) {
-      setLoading(true);
-      setError(null);
+      setLoading(true); // Set loading to true before making the API call
+      setError(null); // Reset error state
       try {
-        const data = await fetchGitHubUser(searchQuery);
+        const data = await fetchGitHubUser(searchQuery); // Fetch GitHub user data
         if (data.message === 'Not Found') {
-          setError('User not found');
+          setError('User not found'); // Handle case when user is not found
         } else {
-          setUserData(data); // Store the fetched user data
-          setError(null);
+          setUserData(data); // Store the fetched user data in state
+          setError(null); // Clear any previous error messages
         }
       } catch (error) {
-        setError('Error fetching GitHub user');
+        setError('Error fetching GitHub user'); // Handle API error
         console.error(error);
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading to false after API call is completed
       }
     }
   };
