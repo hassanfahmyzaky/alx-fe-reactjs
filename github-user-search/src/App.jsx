@@ -1,19 +1,19 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import Search from './components/Search'; // Search component
 import UserCard from './components/UserCard'; // User data display component
-import { fetchGitHubUser } from './services/githubService';
+import { fetchGitHubUser } from './services/githubService'; // Import fetchGitHubUser service
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState(''); // For storing the search query
   const [userData, setUserData] = useState(null); // For storing fetched user data
   const [error, setError] = useState(null); // For storing error messages
   const [loading, setLoading] = useState(false); // For managing loading state
-  const [count, setCount] = useState(0); // Optional count section (for testing HMR)
+  const [count, setCount] = useState(0); // Optional counter section (for testing HMR)
 
+  // Handle the search and fetch the GitHub user data
   const handleSearch = async () => {
     if (searchQuery) {
       setLoading(true); // Set loading to true before making the API call
