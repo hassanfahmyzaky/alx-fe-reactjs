@@ -3,9 +3,8 @@ import React, { useState } from 'react';
 import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import SearchBar from './components/SearchBar';
-import Search from './components/Search';
-import UserCard from './components/UserCard';
+import Search from './components/Search'; // Search component
+import UserCard from './components/UserCard'; // User data display component
 import { fetchGitHubUser } from './services/githubService';
 
 const App = () => {
@@ -13,6 +12,7 @@ const App = () => {
   const [userData, setUserData] = useState(null); // For storing fetched user data
   const [error, setError] = useState(null); // For storing error messages
   const [loading, setLoading] = useState(false); // For managing loading state
+  const [count, setCount] = useState(0); // Optional count section (for testing HMR)
 
   const handleSearch = async () => {
     if (searchQuery) {
@@ -37,6 +37,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* Logo Section */}
       <div>
         <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -45,25 +46,21 @@ const App = () => {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
+      {/* Header */}
       <h1>GitHub User Search</h1>
-      
-      {/* SearchBar Component */}
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
-      
-      {/* Loading State */}
-      {loading && <p>Loading...</p>}
-      
-      {/* Error Message */}
-      {error && <p>{error}</p>}
 
-      {/* UserCard Component */}
-      <UserCard userData={userData} />
-      
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* Search Component */}
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleSearch={handleSearch}
+        loading={loading}
+        error={error}
+        userData={userData}
+      />
 
-      {/* Optional counter section */}
+      {/* Optional Counter Section */}
       <div>
         <button onClick={() => setCount(count + 1)}>
           Count is {count}
