@@ -32,7 +32,7 @@ const Search = ({ searchQuery, setSearchQuery, handleSearch, loading, error, use
       {loading && <p>Loading...</p>}
 
       {/* Error State */}
-      {error && <p>{error === 'User not found' ? "Looks like we can't find the user" : error}</p>}
+      {error && <p>{error === 'User not found' ? "Looks like we cant find the user" : error}</p>}
 
       {/* Displaying User Data */}
       {userData && !loading && !error && (
