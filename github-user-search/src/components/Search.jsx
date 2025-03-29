@@ -1,29 +1,35 @@
 // src/components/Search.jsx
-import React, { useState } from 'react';
+import React from 'react';
 
-const Search = ({ handleSearch }) => {
-  const [username, setUsername] = useState('');
-
-  const handleChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(username);  // Pass the username to the parent component (App)
-  };
-
+const Search = ({ searchQuery, setSearchQuery, handleSearch, loading, error, userData }) => {
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search for GitHub users..."
-          value={username}
-          onChange={handleChange}
-        />
-        <button type="submit">Search</button>
-      </form>
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Enter GitHub Username..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <button onClick={() => handleSearch(searchQuery)}>Search</button>
+
+      {/* Loading State */}
+      {loading && <p>Loading...</p>}
+
+      {/* Error State */}
+      {error && <p>{error}</p>}
+
+      {/* Displaying User Data */}
+      {userData && !loading && !error && (
+        <div className="user-card">
+          <img src={userData.avatar_url} alt={userData.login} width="100" />
+          <h2>{userData.name}</h2>
+          <p>{userData.bio}</p>
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+            Visit Profile
+          </a>
+        </div>
+      )}
     </div>
   );
 };
