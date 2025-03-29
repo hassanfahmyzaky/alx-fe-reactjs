@@ -1,7 +1,7 @@
+// src/services/githubService.js
 import axios from 'axios';
 
-// Combined function to fetch GitHub user data with error handling
-const fetchGitHubUser = async (username) => {
+const fetchUserData = async (username) => {
   try {
     const response = await axios.get(`https://api.github.com/users/${username}`);
     return response.data;  // Return the user data
@@ -10,4 +10,4 @@ const fetchGitHubUser = async (username) => {
   }
 };
 
-export { fetchGitHubUser };
+export { fetchUserData };
