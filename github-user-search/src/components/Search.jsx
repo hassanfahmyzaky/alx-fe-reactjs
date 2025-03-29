@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import axios from 'axios';  // Import axios to make the API request
 
-const Search = ({ searchQuery, setSearchQuery, handleSearch, loading, error, userData }) => {
+// This function will fetch the GitHub user data
+const fetchGitHubUser = async (username) => {
+  try {
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('User not found');  // If the user is not found or there’s an issue
+  }
+};
+
+const Search = ({ searchQuery, setSearchQuery, loading, error, userData, setUserData, setError, setLoading }) => {
   // This local state will be used for user input in the form
   const [username, setUsername] = useState(searchQuery);
 
@@ -9,9 +20,26 @@ const Search = ({ searchQuery, setSearchQuery, handleSearch, loading, error, use
     setSearchQuery(e.target.value); // Sync the input with the parent state
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleSearch(username);  // Pass the username to the parent component (App)
+    if (username) {
+      setLoading(true);
+      setError(null); // Clear previous errors
+      try {
+        const data = await fetchGitHubUser(username);  // Call fetchGitHubUser
+        if (data.message === 'Not Found') {
+          setError('User not found');
+        } else {
+          setUserData(data); // Store the fetched user data
+          setError(null); // Reset error state
+        }
+      } catch (error) {
+        setError('Error fetching GitHub user');
+        console.error(error);
+      } finally {
+        setLoading(false); // Set loading to false after API call is completed
+      }
+    }
   };
 
   return (
