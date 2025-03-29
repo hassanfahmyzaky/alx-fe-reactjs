@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';  // Import axios to make the API request
 
 // This function will fetch the GitHub user data
-const fetchGitHubUser = async (username) => {
+const fetchUserData = async (username) => {  // Renamed from fetchGitHubUser to fetchUserData
   try {
     const response = await axios.get(`https://api.github.com/users/${username}`);
     return response.data;
@@ -26,7 +26,7 @@ const Search = ({ searchQuery, setSearchQuery, loading, error, userData, setUser
       setLoading(true);
       setError(null); // Clear previous errors
       try {
-        const data = await fetchGitHubUser(username);  // Call fetchGitHubUser
+        const data = await fetchUserData(username);  // Call fetchUserData (which is renamed)
         if (data.message === 'Not Found') {
           setError('User not found');
         } else {
