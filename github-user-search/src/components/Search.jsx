@@ -1,38 +1,23 @@
 // src/components/Search.jsx
-import React, { useState } from 'react';
+import React from 'react';
 
 const Search = ({ searchQuery, setSearchQuery, handleSearch, loading, error, userData }) => {
-  // This local state will be used for user input in the form
-  const [username, setUsername] = useState(searchQuery);
-
-  const handleChange = (e) => {
-    setUsername(e.target.value);
-    setSearchQuery(e.target.value); // Sync the input with the parent state
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(username);  // Pass the username to the parent component (App)
-  };
-
   return (
     <div>
-      {/* Search Form */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search for GitHub users..."
-          value={username}
-          onChange={handleChange}
-        />
-        <button type="submit">Search</button>
-      </form>
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Enter GitHub Username..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
 
       {/* Loading State */}
       {loading && <p>Loading...</p>}
 
       {/* Error State */}
-      {error && <p>{error}</p>}
+      {error && <p>{error === 'User not found' ? "Looks like we can't find the user" : error}</p>}
 
       {/* Displaying User Data */}
       {userData && !loading && !error && (
